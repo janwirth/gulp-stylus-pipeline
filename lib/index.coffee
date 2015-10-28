@@ -12,8 +12,9 @@ handleError = (err) ->
     this.emit 'end'
 
 module.exports = (gulp, config, reload) ->
+    console.log typeof gulp.constructor.name
 
-    if !gulp.constructor.name != 'Gulp'
+    if gulp.constructor.name != 'Gulp'
         throw new ReferenceError 'Pass a valid gulp instance to stylus-pipeline'
 
     config = _.extend(config, defaults)
