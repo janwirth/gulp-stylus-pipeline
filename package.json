@@ -2,7 +2,7 @@
   "name": "gulp-stylus-pipeline",
   "version": "0.0.1",
   "description": "Stylus pipeline for gulp",
-  "main": "index.coffee",
+  "main": "lib",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,5 +28,8 @@
     "gulp-debug": "^2.1.2",
     "gulp-order": "^1.1.1",
     "gulp-plumber": "^1.0.1"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.10.0"
   }
 }
