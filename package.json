@@ -1,5 +1,5 @@
 {
-  "name": "stylus-pipeline",
+  "name": "gulp-stylus-pipeline",
   "version": "0.0.1",
   "description": "Stylus pipeline for gulp",
   "main": "index.coffee",
@@ -20,5 +20,13 @@
   "bugs": {
     "url": "https://github.com/FranzSkuffka/stylus-pipeline/issues"
   },
-  "homepage": "https://github.com/FranzSkuffka/stylus-pipeline#readme"
+  "homepage": "https://github.com/FranzSkuffka/stylus-pipeline#readme",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-accord": "^0.2.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-debug": "^2.1.2",
+    "gulp-order": "^1.1.1",
+    "gulp-plumber": "^1.0.1"
+  }
 }
