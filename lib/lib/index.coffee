@@ -1,10 +1,8 @@
-_        =  require  'underscore'
 accord   =  require  'gulp-accord'
 concat   =  require  'gulp-concat'
 debug    =  require  'gulp-debug'
 order    =  require  'gulp-order'
 plumber  =  require  'gulp-plumber'
-defaults =  require  './defaults'
 
 handleError = (err) ->
     console.log 'handling error'
@@ -12,28 +10,28 @@ handleError = (err) ->
     this.emit 'end'
 
 module.exports = (gulp, config, reload) ->
-    config = _.extend(config, defaults)
+    console.log 'setting task'
     gulp.task 'stylus', ->
             gulp.src('styl/**/*.styl')
             .pipe plumber()
 
-            .pipe order config.order
+            .pipe order config.stylus.order
             .pipe debug # print file order
                 title: 'stylus'
                 minimal: true
             .pipe concat('style.styl')
 
             .pipe accord 'stylus', # stylus-lang.com
-                use: config.libraries
+                use: config.stylus.libraries
             .on 'error', handleError
             .pipe accord 'postcss', # linting
-                use: config.linters
+                use: config.stylus.linters
             .on 'error', handleError
             .pipe accord 'postcss', # processing
-                use: config.processors
+                use: config.stylus.processors
             .on 'error', handleError
             .pipe accord 'postcss', # predeploy processing
-                use: config.postprocessors
+                use: config.stylus.postprocessors
             .on 'error', handleError
 
             .pipe gulp.dest '..'
