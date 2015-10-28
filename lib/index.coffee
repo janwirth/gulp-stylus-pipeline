@@ -21,24 +21,29 @@ module.exports = (gulp, config, reload) ->
             gulp.src('styl/**/*.styl')
             .pipe plumber()
 
+            # print file order
             .pipe order config.order
-            .pipe debug # print file order
+            .pipe debug 
                 title: 'stylus'
                 minimal: true
             .pipe concat('style.styl')
 
-            .pipe accord 'stylus', # stylus-lang.com
+            .pipe accord 'stylus',
                 use: config.libraries
             .on 'error', handleError
-            .pipe accord 'postcss', # linting
+
+            .pipe accord 'postcss',
                 use: config.linters
             .on 'error', handleError
-            .pipe accord 'postcss', # processing
+
+            .pipe accord 'postcss',
                 use: config.processors
             .on 'error', handleError
-            .pipe accord 'postcss', # predeploy processing
+
+            .pipe accord 'postcss',
                 use: config.postprocessors
             .on 'error', handleError
+
 
             .pipe gulp.dest '..'
             .pipe reload()
