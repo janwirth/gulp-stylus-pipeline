@@ -11,15 +11,17 @@ handleError = (err) ->
     console.log err.toString()
     this.emit 'end'
 
-module.exports = (gulp, config, reload) ->
-    console.log typeof gulp.constructor.name
-
+module.exports = (gulp, config) ->
     if gulp.constructor.name != 'Gulp'
         throw new ReferenceError 'Pass a valid gulp instance to stylus-pipeline'
 
-    config = _.extend(config, defaults)
+    # prepare config
+    if !config?
+        config = require './exampleConfig'
+    config = _.extend(defaults, config)
+
     gulp.task 'stylus', ->
-            gulp.src('styl/**/*.styl')
+        gulp.src('styl/**/*.styl')
             .pipe plumber()
 
             # print file order
@@ -44,10 +46,7 @@ module.exports = (gulp, config, reload) ->
             .pipe accord 'postcss',
                 use: config.postprocessors
             .on 'error', handleError
-
-
             .pipe gulp.dest '..'
-            .pipe reload()
 
     gulp.task 'predeploy', ->
         settings.task = 'predeploy'
