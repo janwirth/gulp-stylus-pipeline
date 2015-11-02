@@ -21,7 +21,7 @@ module.exports = (gulp, config) ->
     config = _.extend(defaults, config)
 
     gulp.task 'stylus', ->
-        gulp.src('styl/**/*.styl')
+        gulp.src(config.styleFileDirectory + '/**/*.styl')
             .pipe plumber()
 
             # print file order

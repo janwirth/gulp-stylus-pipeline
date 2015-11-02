@@ -1,4 +1,5 @@
 module.exports =
+    styleFileDirectory: 'css'
     order: # load order for stylus files
         [
             '**/metaData.styl',
