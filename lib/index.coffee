@@ -1,6 +1,7 @@
 _        =  require  'underscore'
 accord   =  require  'gulp-accord'
 concat   =  require  'gulp-concat'
+concat   =  require  'gulp-concat-sourcemap'
 debug    =  require  'gulp-debug'
 order    =  require  'gulp-order'
 plumber  =  require  'gulp-plumber'
