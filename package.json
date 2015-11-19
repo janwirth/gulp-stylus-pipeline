@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/FranzSkuffka/stylus-pipeline#readme",
   "dependencies": {
-    "coffee-script": "^1.10.0",
     "gulp": "^3.9.0",
     "gulp-accord": "^0.2.0",
     "gulp-concat": "^2.6.0",
