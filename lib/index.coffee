@@ -46,7 +46,3 @@ module.exports = (gulp, config) ->
                 use: allPlugins
             .on 'error', handleError
             .pipe gulp.dest '..'
-
-    gulp.task 'predeploy', ->
-        settings.task = 'predeploy'
-        gulp.start 'stylus'
