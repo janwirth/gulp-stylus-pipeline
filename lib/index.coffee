@@ -5,6 +5,7 @@ debug    =  require  'gulp-debug'
 order    =  require  'gulp-order'
 plumber  =  require  'gulp-plumber'
 defaults =  require  './defaults'
+poststylus = require 'poststylus'
 
 handleError = (err) ->
     console.log 'handling error'
@@ -20,9 +21,18 @@ module.exports = (gulp, config) ->
         config = require './exampleConfig'
     config = _.extend(defaults, config)
 
+    allPlugins = config.libraries # only stylus libraries
+    allPostCssPlugins = config.processors # only linters
+    allPostCssPlugins.concat(
+        config.postprocessors
+    )
+
+    allPlugins.push(poststylus config.linters)
+    allPlugins.push(poststylus allPostCssPlugins)
+
+
     gulp.task 'stylus', ->
         gulp.src(config.styleFileDirectory + '/**/*.styl')
-            .pipe plumber()
 
             # print file order
             .pipe order config.order
@@ -32,19 +42,7 @@ module.exports = (gulp, config) ->
             .pipe concat('style.styl')
 
             .pipe accord 'stylus',
-                use: config.libraries
-            .on 'error', handleError
-
-            .pipe accord 'postcss',
-                use: config.linters
-            .on 'error', handleError
-
-            .pipe accord 'postcss',
-                use: config.processors
-            .on 'error', handleError
-
-            .pipe accord 'postcss',
-                use: config.postprocessors
+                use: allPlugins
             .on 'error', handleError
             .pipe gulp.dest '..'
 
